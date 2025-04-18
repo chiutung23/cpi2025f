@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1900">
+  <title>011 買書</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css"><!--edit-->
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="./dist/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script src="./dist/bundle.js"></script>
+  <style>
+    ul,
+    ol {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .reveal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 26px;
+    }
+
+    #pageIndex {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        background: #000;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .controls {
+        bottom: 24px !important;
+    }
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px; 
+      width: 1100px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!--
+         data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+         data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+         data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+         data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+         data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+      -->
+
+      <!--Q1-->
+      <section>
+        <h3 style="text-align: left;">011 買書</h3>
+        <section 
+          data-no="6"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left">
+          有A、B、C三種書本，一顧客欲購買A:ｘ本、B:ｙ本、C:ｚ本（ｘ、ｙ、ｚ為使用者輸入），請計算A、B、C各花費多少，
+          以及總共需花費多少錢？<br><br>
+          每本書的費用，最後以無條件進位法到整數。
+          <br><br>
+          <font size=5>A、B、C三本書價格如下：</font><br>
+         <table class="table">
+            <tr>
+              <th class="th"></th>
+              <th class="th">定價</th>
+              <th class="th">1~10本</th>
+              <th class="th">11~20本</th>
+              <th class="th">21~30本</th>
+              <th class="th">31本以上</th>
+            </tr>
+            <tr>
+              <td class="td">A</td>
+              <td class="td">380</td>
+              <td class="td">原價</td>
+              <td class="td">打A1折</td>
+              <td class="td">打A2折</td>
+              <td class="td">打A3折</td>
+            </tr>
+            <tr>
+              <td class="td">B</td>
+              <td class="td">1200</td>
+              <td class="td">原價</td>
+              <td class="td">打B1折</td>
+              <td class="td">打B2折</td>
+              <td class="td">打B3折</td>
+            </tr>
+            <tr>
+              <td class="td">C</td>
+              <td class="td">180</td>
+              <td class="td">原價</td>
+              <td class="td">打C1折</td>
+              <td class="td">打C2折</td>
+              <td class="td">打C3折</td>
+            </tr>
+          </table>
+        </section>
+        
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <table class="table"><br>
+            <tr>
+              <th class="th">輸入說明</th>
+              <th class="th">輸出說明</th>
+            </tr>
+            <tr>
+              <td class="td">1. A 書本數量(整數,0~100),A1,A2,A3<br>
+                            2. B 書本數量(整數,0~100),B1,B2,B3<br>
+                            3. C 書本數量(整數,0~100),C1,C2,C3<br>
+                            (A1~C3為整數0~100，若85為85折，即為*0.85)<br></td>
+              <td class="td">1. 花費最多的書本名稱、費用(中間以逗號隔開)<br>
+                2. 花費中間的書本名稱、費用(中間以逗號隔開)<br>
+                3. 花費最少的書本名稱、費用(中間以逗號隔開)<br>
+                4. 總費用<br>
+                (如果兩本書費用相同，按照A>B>C的順序輸出)<br>
+                (總費用為每本書最後整數費用的加總)<br>
+              </td>
+            </tr>
+          
+          </table><br>
+      </section>
+    </section>
+
+      <section>
+          <h3>Input/Output</h3>
+          <section data-auto-animate
+            data-no="6" 
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0"
+            style="text-align: left"><br>
+            <font size=5>第一行：A書本的數量:6, A1:95, A2:80, A3:75<br>
+            第二行：B書本的數量:12, B1:95, B2:80, B3:70<br>
+            第三行：C書本的數量:30, C1:90, C2:80, C3:75<br>
+            A: 6*380=2280(10本以下，沒有打折)<br>
+            B: 12*1200*0.95=13680(11~20本，打B1折)<br>
+            C: 30*180*0.8=4320(21~30，打C2折)<br>
+            費用由高到低輸出<br>
+            總費用：13680+4320+2280=20280</font><br><br>
+            <table class="table">
+              <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Outpue</th>
+              </tr>
+              <tr>
+                <td class="td">6,95,80,75<br>
+                  12,95,80,70<br>
+                  30,90,80,75
+                  </td>
+                  <td class="td">B,13680<br>
+                    C,4320<br>
+                    A,2280<br>
+                    20280
+                    </td>
+              </tr>
+            </table> 
+          </section>
+          
+          <section data-auto-animate
+            data-no="6" 
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0"
+            style="text-align: left"><br>
+            <font size=5>A:1*380=380 (10本以下，沒有打折)<br>
+                         B:1*1200=1200<br>
+                         C:1*180=180<br>
+                         總費用：380+1200+180=1760</font>
+            <table class="table">
+              <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Outpue</th>
+              </tr>
+              <tr>
+                <td class="td">1,75,68,42<br>
+                              1,79,63,57<br>
+                              1,78,66,59
+                </td>
+                  <td class="td">B,1200<br>
+                                A,380<br>
+                                C,180<br>
+                                1760
+                  </td>
+              </tr>
+            </table> 
+          </section>
+
+          <section data-auto-animate
+            data-no="6" 
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0"
+            style="text-align: left"><br>
+            <font size=5>A:12*380*0.99=4514.5(無條件進位<b>4515</b>)<br>
+            B:22*1200*0.88=23232<br>
+            C:34*180*0.77=4712.4(無條件進位<b>4713</b>)<br>
+            總費用：4515+23232+4713=32460</font>
+            <table class="table">
+              <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Outpue</th>
+              </tr>
+              <tr>
+                <td class="td">12,99,89,79<br>
+                               22,98,88,78<br>
+                               34,97,87,77
+                </td>
+                  <td class="td">B,23232<br>
+                                 C,4713<br>
+                                 A,4515<br>
+                                 32460
+                </td>
+              </tr>
+            </table> 
+          </section>
+      </section>
+
+      <section>
+        <h3>Hints</h3>
+        <section data-auto-animate
+          data-no="17" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <pre style="font-size: 26px;"><code data-trim data-noescape class="language-python">
+            def main():
+              #輸入書本A的數量,A1,A2,A3
+              #輸入書本B的數量,B1,B2,B3
+              #輸入書本C的數量,C1,C2,C3
+              #以(,)拆分輸入字串
+             
+              #獲取3本書處理過後的費用
+              #bookA_price()、bookB_price()、bookC_price()要另外再定義
+              bookA_Price = bookA_price(Abook,A1,A2,A3)
+              bookB_Price = bookB_price(Bbook,B1,B2,B3)
+              bookC_Price = bookC_price(Cbook,C1,C2,C3)
+
+              #呼叫比較費用大小的函式
+              #compare()要另外定義
+              compare(bookA_Price,bookB_Price,bookC_Price)
+
+              #輸出總費用
+          </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <h3>分割字串（split）</h3>
+        <section data-auto-animate
+          data-no="17" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left">
+          <font size=6>在Python中，可以使用<b>split()</b>函數來將一個字串分割成多個子字串，分割後的子字串會轉換成list列表型態，裡面的元素是字串型態的。<br><br>
+          語法：str.split(' ') # ' ' 填入要分割的符號</font><br>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+            str1 = "A,12,99,89,79"
+            str1_split = str1.split(',')
+            print(str1_split)
+          </code></pre>
+          <p size=7>輸出：['A', '12', '99', '89', '79']</p>
+        </section>
+      </section>
+
+      <section>
+        <h3>數學函數（math）</h3>
+        <section data-auto-animate
+          data-no="17" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <font size=6>Python的math函數提供了許多常用的數學函式，例如三角函數、四捨五入、指數、對數、平方根、總和...等，都能夠透過 math 函數來進行運算。</font><br><br>
+          <font size=6 color=red><b>需要import math才能使用</b></font><br><br>
+          <font size=6 >較常用：<br>
+          <b>ceil(x): 無條件進位到整數</b><br>
+          floor(x): 無條件捨去到整數<br>
+          fabs(x): 回傳 x 的絕對值（浮點數）<br>
+          gcd(x, y): 回傳 x 和 y 的最大公因數<br>
+          pow(x, y): 回傳 x 的 y 次方<br>
+          sqrt(x): 回傳 x 的平方根</font><br><br>
+        </section>
+      </section>
+
+      <section>
+        <h3 >解答</h3>
+          <section data-auto-animate
+              data-no="8"
+              data-positionx="0.8" 
+              data-positiony="0.03" 
+              data-scale="1" 
+              data-motionno="0">
+              <font size=6>主程式</font>
+              <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="1-9|11-15|17-21|23-33" class="language-python">
+              import math
+              def main():
+                #輸入書本A的資訊，並以 , 分割字串
+                input_Abook = input().split(',')
+                #將輸入轉換為整數
+                Abook = int(input_Abook[0]) #input_Abook的第一個元素
+                A1 = int(input_Abook[1]) #input_Abook的第二個元素
+                A2 = int(input_Abook[2]) #input_Abook的第三個元素
+                A3 = int(input_Abook[3]) #input_Abook的第四個元素
+                
+                input_Bbook = input().split(',')
+                Bbook = int(input_Bbook[0])
+                B1 = int(input_Bbook[1])
+                B2 = int(input_Bbook[2])
+                B3 = int(input_Bbook[3])
+                
+                input_Cbook = input().split(',')
+                Cbook = int(input_Cbook[0])
+                C1 = int(input_Cbook[1])
+                C2 = int(input_Cbook[2])
+                C3 = int(input_Cbook[3])
+                
+                #獲取3本書處理過後的費用
+                #bookA_price()、bookB_price()、bookC_price()需另外再寫函式
+                bookA_Price = bookA_price(Abook,A1,A2,A3)
+                bookB_Price = bookB_price(Bbook,B1,B2,B3)
+                bookC_Price = bookC_price(Cbook,C1,C2,C3)
+
+                #呼叫比較書本價格並按順序輸出的函式
+                compare(bookA_Price,bookB_Price,bookC_Price)
+                #計算總費用
+                total_price = math.ceil(bookA_Price)+math.ceil(bookB_Price)+math.ceil(bookC_Price)
+                print(total_price)
+              </code></pre>
+          </section>
+      </section>
+
+      <section>
+        <h3 >解答</h3>
+        <section data-auto-animate
+        data-no="8"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0">
+        <font size=6>副程式-bookA_price()</font>
+            <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="" class="language-python">
+              def bookA_price(bookA,A1,A2,A3):
+                #定義priceA變數，初始化為0，代表計算後的書本A價錢
+                priceA = 0 
+                #如果數量10本(含)以下
+                if(0 <= bookA <= 10): 
+                    priceA = 380*bookA #以原價計算
+                #否則如果，11~20本，打A1折
+                elif(11 <= bookA <= 20): 
+                    priceA = (380*bookA)*(A1/100)
+                #否則如果，21~30本，打A2折
+                elif(21 <= bookA <= 30):
+                    priceA = (380*bookA)*(A2/100)
+                #否則如果，31本以上，打A3折
+                #上限100本
+                elif(30 < bookA <= 100):
+                    priceA = (380*bookA)*(A3/100)
+                #回傳priceA的結果
+                return priceA
+            </code></pre>
+          </section>
+
+          <section data-auto-animate
+            data-no="8"
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0">
+            <font size=6>副程式-bookB_price()</font>
+                <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="" class="language-python">
+                  def bookB_price(bookB,B1,B2,B3):
+                    priceB = 0
+                    if(0 <= bookB <= 10):
+                        priceB = 1200*bookB
+                    elif(11 <= bookB <= 20):
+                        priceB = (1200*bookB)*(B1/100)
+                    elif(21 <= bookB <= 30):
+                        priceB = (1200*bookB)*(B2/100)
+                    elif(30 < bookB <= 100):
+                        priceB = (1200*bookB)*(B3/100)
+                    return priceB
+                </code></pre>
+            </section>
+
+            <section data-auto-animate
+            data-no="8"
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0">
+            <font size=6>副程式-bookC_price()</font>
+                <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="" class="language-python">
+                  def bookC_price(bookC,C1,C2,C3):
+                    priceC = 0
+                    if(0 <= bookC <= 10):
+                        priceC = 180*bookC
+                    elif(11 <= bookC <= 20):
+                        priceC = (180*bookC)*(C1/100)
+                    elif(21 <= bookC <= 30):
+                        priceC = (180*bookC)*(C2/100)
+                    elif(30 < bookC <= 100):
+                        priceC = (180*bookC)*(C3/100)
+                    return priceC
+                </code></pre>
+              </section>
+        </section>
+          
+        <section>
+          <h3 >解答</h3>
+          <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>副程式-compare()</font>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="1-11|12-21|22-31" class="language-python">
+            def compare(bookA_price,bookB_price,bookC_price): 
+              #如果A書價格最高
+              if(bookA_price >= bookB_price and bookA_price >= bookC_price):
+                  print('A,',math.ceil(bookA_price)) 
+                  #比較B書和C書的價格
+                  if(bookB_price >= bookC_price):
+                      print('B,',math.ceil(bookB_price))
+                      print('C,',math.ceil(bookC_price))
+                  elif(bookC_price >= bookB_price):
+                      print('C,',math.ceil(bookC_price))
+                      print('B,',math.ceil(bookB_price))
+              # 如果B書價格最高
+              elif(bookB_price >= bookA_price and bookB_price >= bookC_price):
+                  print('B,',math.ceil(bookB_price))  
+                  #比較A書和C書的價格
+                  if(bookA_price >= bookC_price):
+                      print('A,',math.ceil(bookA_price))
+                      print('C,',math.ceil(bookC_price))
+                  elif(bookC_price >= bookA_price):
+                      print('C,',math.ceil(bookC_price))
+                      print('A,',math.ceil(bookA_price))
+              #如果C書價格最高
+              elif(bookC_price >= bookA_price and bookC_price >= bookB_price):
+                  print('C,',math.ceil(bookC_price))
+                  # 比較A書和B書的價格
+                  if(bookA_price >= bookB_price):
+                      print('A,',math.ceil(bookA_price))
+                      print('B,',math.ceil(bookB_price))
+                  elif(bookB_price >= bookA_price):
+                      print('B,',math.ceil(bookB_price))
+                      print('A,',math.ceil(bookA_price))
+          </code></pre>
+          </section>
+        </section>
+   
+        <section>
+        <h3 >解答</h3>
+            <section data-auto-animate
+                data-no="8"
+                data-positionx="0.8" 
+                data-positiony="0.03" 
+                data-scale="1" 
+                data-motionno="0">
+                <font size=6>呼叫主程式<br><br></font>
+                <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers>
+                  if __name__ == '__main__': 
+                    main()
+                </code></pre>
+            </section>
+          </section>
+    </div>
+  </div>
+  <div id="pageIndex"></div>
+  <!-- reveal.js-->
+  <script src="vendor/reveal/reveal.js"></script>
+  <!--plugin-->
+  <script src="vendor/reveal/plugin/math/math.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="main-ppt.js"></script>
+</body>
+
+</html>
