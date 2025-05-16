@@ -39,6 +39,18 @@
             font-size: 26px;
         }
 
+        table.common-table, .common-table th, .common-table td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 0px; 
+            width: 1100px;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
         #pageIndex {
             position: absolute;
             right: 24px;
@@ -52,12 +64,19 @@
             bottom: 24px !important;
         }
 
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 0px; 
-            width: 1100px;
+        table.invisible-table {
+            display: inline-table;        /* 改成 inline-table 可以自動跟內容寬度走 */
+            width: auto !important;       /* 避免被 override 掉 */
+            white-space: nowrap;          /* 防止文字換行撐開欄寬 */
+            margin: 50px auto 0 auto;               /* x 軸置中 */
         }
+
+        table.invisible-table td {
+            padding: 6px 20px;
+            border: none;
+            text-align: left;
+            font-size: 26px;
+        }       
     </style>
 </head>
 
@@ -84,7 +103,7 @@
                       使用者請分別輸入兩個數 num1、num2，並求出兩數的和(Sum)、差(Difference)、乘積(Product)、商(Quotient)。<br><br>
                       結果須輸出到小數點第二位。
                     </p>
-                    <table ><br>
+                    <table class="common-table"><br>
                         <tr>
                           <td>輸入說明</td>
                           <td>輸出說明</td>
@@ -113,7 +132,7 @@
                     data-scale="1" 
                     data-motionno="0"
                     style="text-align: left"><br>
-                    <table>
+                    <table class="common-table">
                         <tr>
                           <th>Sample Input</th>
                           <th>Output</th>
@@ -149,6 +168,93 @@
                                 Product:0.00<br>
                                 Quotient:0.00<br>
                             </td>
+                        </tr>
+                    </table>
+                </section>
+                
+                <section>
+                    <table class="common-table">
+                        <tr>
+                            <th>Sample Input</th>
+                            <th>Output</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                25<br>
+                                2
+                            </td>
+                            <td>
+                                Sum: 27.00<br>
+                                Difference: 23.00<br>
+                                Product: 50.00<br>
+                                Quotient: 12.50
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="invisible-table">
+                        <tr>
+                          <td>
+                            <p>➕ Sum : 25 + 2 = 27.00</p>
+                            <p>➖ Difference : 25 - 2 = 23.00</p>
+                            <p>✖️ Product : 25 * 2 = 50.00</p>
+                            <p>➗ Quotient : 25 / 2 = 12.50</p>
+                          </td>  
+                        </tr>
+                    </table>
+                </section>               
+                <section>
+                    <table class="common-table">
+                        <tr>
+                          <th>Sample Input</th>
+                          <th>Output</th>
+                        </tr>
+                        <tr>
+                            <td>-1<br>
+                                6 <br>
+                            </td>
+                            <td>Sum:5.00<br>
+                                Difference:-7.00<br>
+                                Product:-6.00<br>
+                                Quotient:-0.17<br>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="invisible-table">
+                        <tr>
+                          <td>
+                            <p>➕ Sum : (-1) + 6 = 5.00</p>
+                            <p>➖ Difference : (-1) - 6 = -7.00</p>
+                            <p>✖️ Product : (-1) * 6 = -6.00</p>
+                            <p>➗ Quotient : (-1) / 6 = -0.17</p>
+                          </td>  
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <table class="common-table">
+                        <tr>
+                          <th>Sample Input</th>
+                          <th>Output</th>
+                        </tr>
+                        <tr>
+                            <td>0<br>
+                                9<br>                                
+                            </td>
+                            <td>Sum:9.00<br>
+                                Difference:-9.00<br>
+                                Product:0.00<br>
+                                Quotient:0.00<br>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="invisible-table">
+                        <tr>
+                          <td>
+                            <p>➕ Sum : 0 + 9 = 9.00</p>
+                            <p>➖ Difference : 0 - 9 = -9.00</p>
+                            <p>✖️ Product : 0 * 9 = 0.00</p>
+                            <p>➗ Quotient : 0 / 9 = 0.00</p>
+                          </td>  
                         </tr>
                     </table>
                 </section>
