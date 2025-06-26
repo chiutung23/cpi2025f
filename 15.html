@@ -337,7 +337,7 @@
             def getMode(bmiList):
               #利用字典這個資料型態的特性
               bmiDict = {}
-              #{key : vlaue} -> {bmi : num}
+              #{key : value} -> {bmi : num}
               #讓key代表bmi，value代表數量
               #找出num是最大的bmi
           </code></pre>
@@ -523,8 +523,27 @@
               bmi = (int)(bmi * 100) / 100 
               return bmi
           </code></pre>
-          </section>
-      </section>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+        <img src="img/015/round1.jpg" style="width: auto;height: 500px;">
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+        <img src="img/015/round2.jpg" style="width: auto;height: 500px;">
+        </section>
+
+    </section>
 
     <section>
       <h3 >解答</h3>
@@ -554,41 +573,41 @@
           data-positiony="0.03" 
           data-scale="1" 
           data-motionno="0">
-        <img src="img/015/s1.jpg" style="width: auto;height: 500px;">
+        <img src="img/015/median1.jpg" style="width: auto;height: 500px;">
         </section>
       </section>
 
       <section>
       <h3 >解答</h3>
         <section data-auto-animate
-        data-no="8"
-        data-positionx="0.8" 
-        data-positiony="0.03" 
-        data-scale="1" 
-        data-motionno="0">
-        <font size=6>副程式-getMode():處理眾數</font>
-        <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="1-10|12-19" class="language-python">
-          def getMode(bmiList):
-            #定義變數bmiDict，型態是字典
-            bmiDict = {}
-            for i in range(len(bmiList)):
-              #如果bmiList[i]在bmiDict中的key存在
-              if(bmiList[i] in bmiDict.keys()):
-                  #累加key對應的value
-                  bmiDict[bmiList[i]] += 1
-              else:
-                  bmiDict[bmiList[i]] = 1
-            
-            mode = 0
-            maxNum = 0
-            #輪詢字典的鍵值對，取得bmi和數量
-            for bmi,num in bmiDict.items():
-              if(num > maxNum):
-                maxNum = num
-                mode = bmi
-            return mode
-        </code></pre>
-    </section>
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>副程式-getMode():處理眾數</font>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers="1-10|12-19" class="language-python">
+            def getMode(bmiList):
+              #定義變數bmiDict，型態是字典
+              bmiDict = {}
+              for i in range(len(bmiList)):
+                #如果bmiList[i]在bmiDict中的key存在
+                if(bmiList[i] in bmiDict.keys()):
+                    #累加key對應的value
+                    bmiDict[bmiList[i]] += 1
+                else:
+                    bmiDict[bmiList[i]] = 1
+              
+              mode = 0
+              maxNum = 0
+              #輪詢字典的鍵值對，取得bmi和數量
+              for bmi,num in bmiDict.items():
+                if(num > maxNum):
+                  maxNum = num
+                  mode = bmi
+              return mode
+          </code></pre>
+        </section>
 
         <section data-auto-animate
             data-no="8"
@@ -596,7 +615,7 @@
             data-positiony="0.03" 
             data-scale="1" 
             data-motionno="0">
-          <img src="img/015/s2.jpg" style="width: auto;height: 600px;">
+          <img src="img/015/mode1.jpg" style="width: auto;height: 600px;">
         </section>
       </section>
 
