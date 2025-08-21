@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1900">
+  <title>39 賓果遊戲</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css"><!--edit-->
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="./dist/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script src="./dist/bundle.js"></script>
+  <style>
+    ul,
+    ol {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .reveal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 26px;
+    }
+
+    #pageIndex {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        background: #000;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .controls {
+        bottom: 24px !important;
+    }
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px; 
+      width: 1100px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!--
+         data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+         data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+         data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+         data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+         data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+      -->
+
+      <!--Q1-->
+      <section>
+        <h3 style="text-align: left;">39 賓果遊戲</h3>
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br><br>
+        <p>A和B兩位玩家玩賓果遊戲,每位玩家各自輸入一個 N×N的矩陣，數字從 1~N×N，寫一個程式幫忙判斷哪位玩家勝出或平手。<br><br>
+        連線規則：某一直行或橫排或斜線完全被圈選起來，即可被算做達成一條線。</p>
+        <table class="table">
+            <tr>
+                <th class="th">輸入說明</th>
+                <th class="th">輸出說明</th>
+            </tr>
+            <tr>
+                <td class="td">1. 輸入整數N (3<=N<=6)，代表一個N×N的矩陣。<br>
+                2. 輸入M (N<=M<=N×N)，代表有M個被圈起來的數字數量。<br>
+                3. 輸入一行字串，代表玩家A的N×N的矩陣數字以及數字的位置，每個數字以空白隔開，每個數字從左而右、從上而下，填入矩陣。<br>
+                4. 輸入一行字串，代表玩家B的N×N的矩陣數字以及數字的位置，每個數字以空白隔開，每個數字從左而右、從上而下，填入矩陣。<br>
+                5. 輸入一行字串，代表被圈起來的數字，每個數字以空白隔開。               
+                </td>
+                <td class="td">1. 輸出誰達成的連線最多，輸出誰贏，假如A贏，輸出A Win(中間以空白隔開)，假如B贏，輸出B Win(中間以空白隔開)，此外平手的話，輸出Tie。                    
+                </td>   
+            </tr>
+        </table>
+        </section>
+    </section>
+
+    <section>
+        <h3>Input/Output</h3><br> 
+        <section data-auto-animate
+        data-no="6" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br>
+        <p style="font-size: 21px;">範例輸入說明 1：<br>第1行：3 -> 代表N=3，A和B的矩陣大小為3×3。<br>
+        第2行：4 -> 代表M=4，有四個號碼被圈選起來。<br>第3行：6 1 8 4 7 2 5 9 3 -> A的矩陣，依照從左而右、從上而下的順序被填入數字6、1、8、4、7、2、5、9、3。<br>
+        第4行：9 6 4 5 1 8 2 7 3 -> B的矩陣，依照從左而右、從上而下的順序被填入數字9、6、4、5、1、8、2、7、3。<br>第5行：6 1 8 3 -> A和B的矩陣中，數字6、1、8、3被圈選起來。<br>
+        </p>
+        <table class="table">
+            <tr>
+                <th class="th" style="font-size: 21px;">Sample Input</th>
+                <th class="th" style="font-size: 21px;">Output</th>
+            </tr>
+            <tr>
+              <td class="td" style="font-size: 21px;">3<br>
+                4<br>
+                6 1 8 4 7 2 5 9 3<br>
+                9 6 4 5 1 8 2 7 3<br>
+                6 1 8 3<br>
+              </td>
+              <td class="td" style="font-size: 21px;">A Win
+              </td>
+            </tr>
+        </table>
+        <p style="font-size: 21px;">範例輸出說明1：A Win (A連成一條線，B則沒有連成任何一條線，所以A贏)。
+        </p>
+        </section>
+
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <table class="table">
+            <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Output</th>
+            </tr>
+            <tr>
+                <td class="td">3<br>
+                    4<br>
+                    1 2 3 4 5 6 7 8 9<br>
+                    1 2 5 3 7 9 4 8 6<br>
+                    3 7 1 2<br>
+                </td>
+                <td class="td">A Win
+                </td>
+            </tr>
+            <tr>
+                <td class="td">4<br>
+                    6<br>
+                    1 9 7 8 10 2 11 12 13 5 3 6 14 16 15 4<br>
+                    10 8 11 5 13 1 2 16 15 6 3 14 7 9 4 12<br>
+                    10 11 13 5 6 14 4<br>
+                </td>
+                <td class="td">Tie
+                </td>
+            </tr>
+            <tr>
+                <td class="td">5<br>
+                    9<br>
+                    1 17 7 6 16 20 2 21 15 14 8 18 3 13 24 9 19 23 4 22 10 11 12 25 5<br>
+                    1 15 13 14 10 2 6 17 11 16 3 19 7 20 18 4 5 21 8 24 12 22 23 25 9<br>
+                    12 4 5 3 2 1 10 11 7<br>
+                </td>
+                <td class="td">B Win
+                </td>
+            </tr>
+          </table>
+        </section>
+
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <table class="table">
+            <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Output</th>
+            </tr>
+            <tr>
+                <td class="td">6<br>
+                16<br>
+                1 33 10 11 21 22 2 32 31 12 20 23 3 4 5 13 25 24 15 14 26 6 34 30 16 28 27 36 7 8 17 18 29 35 19 9<br>
+                13 29 14 7 1 16 28 30 15 8 2 17 12 35 33 3 20 19 11 34 4 24 9 26 23 5 21 25 10 27 6 31 36 22 32 18<br>
+                13 1 30 8 2 33 20 11 24 9 22 32 18 10 21 23<br>
+                </td>
+                <td class="td">Tie  
+                </td>
+            </tr>
+          </table>
+        </section>
+    </section>
+
+      <section>
+        <h3>Hints</h3>
+        <section data-auto-animate
+        data-no="17" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left;"><br>
+        <pre style="font-size: 26px;"><code data-trim data-noescape class="language-python" data-line-numbers="37-51|1-51">
+        def initData(N, _map, _record):
+        #用來初始化矩陣(_map)和對應的記錄矩陣(_record)
+            #輸入N*N個數字，並用空格分割字串
+            #假設輸入A的矩陣大小為3×3，數字為:6 1 8 4 7 2 5 9 3
+            #_map最後的存放的結構為:[['6','1','8'],['4','7','2'],['5','9','3']]
+            #_record:[['0','0','0'],['0','0','0'],['0','0','0']]
+        
+        def modifyRecord(target, _map, _record):
+            #檢查某個數字(target)是否出現在_map中，
+            #如果有，則在_record中將對應位置標記為'1'
+        
+        def markMap(markData, _map, _record):
+            #針對每個被圈選的數字(markData的元素)，更新記錄矩陣(_record)
+        
+        def CheckRowLine(record):
+            #檢查某一行(矩陣上橫的方向)是否全部都被圈選，
+            #如果有，回傳1，否則回傳0
+         
+        def CheckColumnLine(record, column):
+            #檢查每一列(矩陣上直的方向)是否全部都被圈選，
+            #如果有，回傳1，否則回傳0
+        
+        def CheckRightSlope(record):
+            #檢查矩陣上左上到右下的斜線是否全部都被圈選，
+            #如果有，回傳1，否則回傳0
+        
+        def CheckLeftSlope(record):
+            #檢查矩陣上右上到左下的斜線是否全部都被圈選，
+            #如果有，回傳1，否則回傳0
+        
+        def getTotalLines(record):
+            #計算總共有多少條連線（橫、直、斜線方向）被完全圈選
+        
+        def showResult(linesA, linesB):
+            #比較兩個矩陣的連線數量，並輸出結果
+
+        def main():
+            mapA = [] #用來存放A矩陣
+            mapB = [] #用來存放B矩陣
+            recordA = []  #用來記錄A矩陣被圈選的情況
+            recordB = []  #用來記錄B矩陣被圈選的情況
+
+            #輸入矩陣大小N
+            #輸入有幾個號碼被圈選出來
+            #初始化A、B矩陣和記錄矩陣
+
+            #輸入圈選出來的數字
+            #更新A、B矩陣的記錄
+            #計算A、B矩陣完成的連線數
+            
+            #比較兩者的完成連線數並顯示結果
+          </code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h3 >解答</h3>
+          <section data-auto-animate
+            data-no="8"
+            data-positionx="0.8" 
+            data-positiony="0.03" 
+            data-scale="1" 
+            data-motionno="0">
+            <font size=6>主程式</font>
+            <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+            def main():
+                mapA = [] #用來存放A矩陣
+                mapB = [] #用來存放B矩陣
+                recordA = []  #用來記錄A矩陣被圈選的情況
+                recordB = []  #用來記錄B矩陣被圈選的情況
+                N = int(input()) #輸入矩陣大小
+                M = int(input()) #輸入有幾個號碼被圈選出來
+                initData(N, mapA, recordA)  #初始化A矩陣和記錄矩陣
+                initData(N, mapB, recordB)  #初始化B矩陣和記錄矩陣
+                markData = input().split(' ')  #輸入圈選出來的數字
+                markMap(markData, mapA, recordA)  #更新A矩陣的記錄
+                markMap(markData, mapB, recordB)  #更新B矩陣的記錄
+                linesA = getTotalLines(recordA)  #計算A矩陣完成的連線數
+                linesB = getTotalLines(recordB)  #計算B矩陣完成的連線數
+                showResult(linesA, linesB)  #比較兩者的完成連線數並顯示結果
+              </code></pre>
+          </section>
+    </section>
+
+    <section>
+      <h3 >解答</h3>
+        <section data-auto-animate
+        data-no="8"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"><br><br>
+        <p>副程式-initData()、markMap()、modifyRecord()、CheckRowLine()、
+            CheckColumnLine()、CheckRightSlope()、CheckLeftSlope()、getTotalLines()、showResult()
+        </p>
+        <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers="1-14|16-27|63-67|29-37|68-69|39-45|70-72|47-61|74-81|1-81" class="language-python">
+        #初始化矩陣(_map)和對應的記錄矩陣(_record)
+        def initData(N, _map, _record):
+            #輸入N*N個數字，並用空格分割字串
+            data = input().split(' ') 
+            for i in range(N):
+                #在_map中新增一個空的list，用來存放該行的數字
+                _map.append([])
+                #在_record中新增一個空的list，用來存放該行的記錄
+                _record.append([])
+                for j in range(N):
+                    #將對應的數字填入_map的對應位置
+                    _map[i].append(data[N*i+j])
+                    #將_record的對應位置填入'0'，表示該位置未被圈選
+                    _record[i].append('0')
+        
+        #針對每個被圈選的數字，更新記錄矩陣(_record)
+        def markMap(markData, _map, _record):
+            for data in markData:
+                modifyRecord(data, _map, _record)
+        
+        #用來檢查某個數字(target)是否出現在_map中
+        def modifyRecord(target, _map, _record):
+            for i in range(len(_map)):
+                for j in range(len(_map)):
+                    if(target==_map[i][j]):
+                        #如果要圈選數字出現在_map中，就將_record標記為1
+                        _record[i][j] = '1' 
+
+        #檢查某一行(矩陣上橫的方向)是否全部都被圈選
+        def CheckRowLine(record):
+            counter = 0
+            for i in range(0, len(record)):
+                #如果record[i]有被標記為1
+                if(record[i]=='1'):
+                    counter += 1 #累加counter
+            #如果有全部都被圈選，回傳1，否則回傳0
+            return 1 if counter==len(record) else 0
+        
+        #檢查每一列(矩陣上直的方向)是否全部都被圈選
+        def CheckColumnLine(record, column):
+            counter = 0
+            for i in range(0, len(record)):
+                if(record[i][column]=='1'):
+                    counter += 1
+            return 1 if counter==len(record) else 0
+        
+        #檢查矩陣上左上到右下的斜線是否全部都被圈選
+        def CheckRightSlope(record):
+            counter = 0
+            for i in range(0, len(record)):
+                if(record[i][i]=='1'):
+                    counter += 1
+            return 1 if counter==len(record) else 0
+        
+        #檢查矩陣上右上到左下的斜線是否全部都被圈選
+        def CheckLeftSlope(record):
+            counter = 0
+            for i in range(0, len(record)):
+                if(record[len(record)-i-1][i]=='1'):
+                    counter += 1
+            return 1 if counter==len(record) else 0
+
+        #計算總共有多少條連線（橫、直、斜線方向）被完全圈選
+        def getTotalLines(record):
+            counter = 0
+            for i in range(0, len(record)):
+                counter += CheckRowLine(record[i]) #檢查橫方向是否被完全圈選
+            for i in range(0, len(record)):
+                counter += CheckColumnLine(record, i) #檢查直方向是否被完全圈選
+            counter += CheckRightSlope(record) #檢查左上到右下是否被完全圈選
+            counter += CheckLeftSlope(record) #檢查右上到左下是否被完全圈選
+            return counter
+
+        #比較兩個矩陣的連線數量，並輸出結果
+        def showResult(linesA, linesB):
+            if(linesA>linesB):
+                print("A Win")
+            elif(linesA < linesB):
+                print("B Win")
+            else:
+                print("Tie")
+        </code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h3 >解答</h3>
+          <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>呼叫主程式</font>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          if __name__ == '__main__':
+              main()
+          </code></pre>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div id="pageIndex"></div>
+  <!-- reveal.js-->
+  <script src="vendor/reveal/reveal.js"></script>
+  <!--plugin-->
+  <script src="vendor/reveal/plugin/math/math.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="main-ppt.js"></script>
+</body>
+
+</html>
